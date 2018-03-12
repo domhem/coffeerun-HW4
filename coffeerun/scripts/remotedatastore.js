@@ -36,7 +36,6 @@
         }
       }
       $.get(this.url + "/" + id, function(serverResponse) {
-        console.log(serverResponse);
         cb(serverResponse);
       });
     });
@@ -53,7 +52,6 @@
           id = serverResponse[i].id;
         }
       }
-      console.log(id);
       $.ajax(this.url + "/" + id, {
         type: "DELETE"
       });
