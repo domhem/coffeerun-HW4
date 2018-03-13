@@ -3,6 +3,7 @@
   var FORM_SELECTOR = "[data-coffee-order=\"form\"]";
   var CHECKLIST_SELECTOR = "[data-coffee-order=\"checklist\"]";
   var SERVER_URL = "http://localhost:2403/coffeeorders";
+  var $ = window.jQuery;
   var App = window.App || {};
   var Truck = App.Truck;
   //var DataStore = App.DataStore;
@@ -20,6 +21,14 @@
   formHandler.addSubmitHandler(function (data) {
     myTruck.createOrder.call(myTruck, data);
     checkList.addRow.call(checkList, data);
+  });
+
+  //call the checklist to include orders already stored in Deployd
+  $.get(SERVER_URL, function(serverResponse) {
+    console.log(serverResponse);
+    for (var i = 0; i < serverResponse.length; i++) {
+      checkList.addRow.call(checkList, serverResponse[i]);
+    }
   });
 
   formHandler.addInputHandler(Validation.isCompanyEmail);

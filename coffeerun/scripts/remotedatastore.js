@@ -36,6 +36,7 @@
         }
       }
       $.get(this.url + "/" + id, function(serverResponse) {
+        console.log(serverResponse);
         cb(serverResponse);
       });
     });
